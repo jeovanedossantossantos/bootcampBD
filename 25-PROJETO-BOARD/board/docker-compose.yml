@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: sdw2023
+      MYSQL_USER: sdw2023
+      MYSQL_PASSWORD: your_password_here
+      MYSQL_ROOT_PASSWORD: your_root_password_here
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: sdw2023
+      DB_USERNAME: sdw2023
+      DB_PASSWORD: your_password_here
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql_data:

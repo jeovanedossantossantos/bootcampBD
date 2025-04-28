@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  bd:
+    image: mongo
+    container_name: db
+    restart: always
+    environment: 
+      - MONGO_INITDB_ROOT_USERNAME:dio
+      - MONGO_INITDB_ROOT_PASSWORD:dio
+    ports:
+      - "27017:27017"
+    volumes:
+      - .:/db
